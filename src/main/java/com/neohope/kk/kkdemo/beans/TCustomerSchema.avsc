@@ -1,0 +1,8 @@
+{"namespace":"com.neohope.kk.kkdemo.beans",
+"type":"record",
+"name":"TCustomerSchema",
+"fields":[
+	{"name":"id","type":"int"},
+	{"name":"name","type":"string"},
+	{"name":"faxNumber","type":"string"}
+]}

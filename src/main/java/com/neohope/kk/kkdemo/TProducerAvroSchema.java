@@ -12,35 +12,37 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.neohope.kk.kkdemo.beans.TCustomer;
+import com.neohope.kk.kkdemo.beans.TCustomerSchema;
 
-public class TProducerCustom implements Callback, Closeable {
-	private static Logger logger = LoggerFactory.getLogger(TProducerCustom.class);
+public class TProducerAvroSchema implements Callback, Closeable {
+	private static Logger logger = LoggerFactory.getLogger(TProducerAvroSchema.class);
 	
 	private Properties kafkaProps;
-	private KafkaProducer<Integer, TCustomer> producer;
+	private KafkaProducer<Integer, TCustomerSchema> producer;
 	
 	@Override
 	public void close() throws IOException {
 		if(producer!=null)producer.close();
 	}
 	
-	public TProducerCustom(String serverPort, String groupId) {
+	public TProducerAvroSchema(String serverPort, String groupId) {
 		kafkaProps = new Properties();
 		kafkaProps.put("bootstrap.servers",serverPort);
-		kafkaProps.put("key.serializer","org.apache.kafka.common.serialization.IntegerSerializer");
-		kafkaProps.put("value.serializer","com.neohope.kk.kkdemo.beans.TCustomerSerializer");
-		producer = new KafkaProducer<Integer, TCustomer>(kafkaProps);
-		
+		kafkaProps.put("key.serializer","io.confluent.kafka.serializers.KafkaAvroSerializer");
+		kafkaProps.put("value.serializer","io.confluent.kafka.serializers.KafkaAvroSerializer");
+		kafkaProps.put("schema.registry.url", "http://localhost:8081");
+		producer = new KafkaProducer<Integer, TCustomerSchema>(kafkaProps);
 	}
 	
 	public void SendSync() {
-		String topic="TCustomerCustom";
-		TCustomer c=new TCustomer(1,"Tom");
-		ProducerRecord<Integer, TCustomer> record = new ProducerRecord<Integer, TCustomer>(topic, c.getID(), c);
+		String topic="TCustomerAvroSchema";
+		TCustomerSchema c=new TCustomerSchema();
+		c.setId(1);
+		c.setName("Tom");
+		c.setFaxNumber("");
+		ProducerRecord<Integer, TCustomerSchema> record = new ProducerRecord<Integer, TCustomerSchema>(topic, c.getId(), c);
 		try {
 			producer.send(record).get();
-			logger.info("msg sent successed!");
 		} catch (InterruptedException e) {
 			logger.warn(e.getMessage());
 		} catch (ExecutionException e) {
@@ -49,10 +51,13 @@ public class TProducerCustom implements Callback, Closeable {
 	}
 	
 	public void SendAsync() {
-		String topic="TCustomerCustom";
-		TCustomer c=new TCustomer(2,"Jerry");
-	    ProducerRecord<Integer, TCustomer> record = new ProducerRecord<Integer, TCustomer>(topic, c.getID(), c);
-		producer.send(record,this);
+		String topic="TCustomerAvroSchema";
+		TCustomerSchema c=new TCustomerSchema();
+		c.setId(2);
+		c.setName("Jerry");
+		c.setFaxNumber("");
+	    ProducerRecord<Integer, TCustomerSchema> record = new ProducerRecord<Integer, TCustomerSchema>(topic, c.getId(), c);
+		producer.send(record, this);
 	}
 	
 	@Override
@@ -62,7 +67,7 @@ public class TProducerCustom implements Callback, Closeable {
 	}
 	
     public static void main( String[] args ) throws IOException {
-    	TProducerCustom producer = new TProducerCustom("localhost:9092", "group002");
+    	TProducerAvroSchema producer = new TProducerAvroSchema("localhost:9092", "group003");
     	producer.SendSync();
     	producer.SendAsync();
     	
@@ -72,4 +77,5 @@ public class TProducerCustom implements Callback, Closeable {
 		
 		producer.close();
     }
+
 }
