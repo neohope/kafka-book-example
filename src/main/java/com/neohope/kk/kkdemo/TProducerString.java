@@ -36,6 +36,7 @@ public class TProducerString implements Callback, Closeable {
 		String topic="TCustomer";
 		ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, "id001", "Tom");
 		try {
+			//如果去掉get，也不会阻塞，但无法获知发送结果
 			producer.send(record).get();
 			logger.info("msg sent successed!");
 		} catch (InterruptedException e) {

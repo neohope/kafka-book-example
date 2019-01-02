@@ -47,6 +47,7 @@ public class TConsumerCustom implements Callback, Closeable {
 					logger.info(String.format("topic=%s, partition=%s, offset=%d, customerId=%s, customerName=%s",
 							record.topic(), record.partition(), record.offset(), record.key(), record.value().getName()));
 				}
+				consumer.commitSync();
 				
 				Thread.sleep(200);
 			}
