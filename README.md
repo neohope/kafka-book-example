@@ -1,6 +1,6 @@
 About
 ====================
-kkdemo
+Kafka demo
 
 This is a code example that complements the material in the Kafka O'Reilly book. 
 
@@ -22,6 +22,10 @@ Run
 2. TConsumerCustom/TProducerCustom: custom serialization
 3. TConsumerAvroSchema/TProducerAvroSchema: avro schema serialization
 4. TConsumerAvroGeneral/TProducerGeneral: avro general serialization
+5. TConsumerOffset: how to commit offset
+6. TConsumerStandalone: how to use shutdownhook
+7. TPartition: partitioner
+8. TRebalance: reblancer
 
 
 How to generate TCustomerSerializer.java
