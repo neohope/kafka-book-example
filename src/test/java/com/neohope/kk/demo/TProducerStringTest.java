@@ -1,4 +1,4 @@
-package com.neohope.kk.kkdemo;
+package com.neohope.kk.demo;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

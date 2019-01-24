@@ -1,4 +1,4 @@
-package com.neohope.kk.kkdemo;
+package com.neohope.kk.demo.string;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -12,33 +12,35 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.neohope.kk.kkdemo.beans.TCustomer;
-
-public class TProducerCustom implements Callback, Closeable {
-	private static Logger logger = LoggerFactory.getLogger(TProducerCustom.class);
+/**
+ * 通过kafka自带String序列化传递信息
+ * @author Hansen
+ */
+public class TProducerString implements Callback, Closeable {
+	private static Logger logger = LoggerFactory.getLogger(TProducerString.class);
 	
 	private Properties kafkaProps;
-	private KafkaProducer<Integer, TCustomer> producer;
+	private KafkaProducer<String, String> producer;
 	
 	@Override
 	public void close() throws IOException {
 		if(producer!=null)producer.close();
 	}
 	
-	public TProducerCustom(String serverPort, String groupId) {
+	public TProducerString(String serverPort, String groupId) {
 		kafkaProps = new Properties();
 		kafkaProps.put("bootstrap.servers",serverPort);
-		kafkaProps.put("key.serializer","org.apache.kafka.common.serialization.IntegerSerializer");
-		kafkaProps.put("value.serializer","com.neohope.kk.kkdemo.beans.TCustomerSerializer");
-		producer = new KafkaProducer<Integer, TCustomer>(kafkaProps);
+		kafkaProps.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
+		kafkaProps.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
+		producer = new KafkaProducer<String, String>(kafkaProps);
 		
 	}
 	
 	public void SendSync() {
-		String topic="TCustomerCustom";
-		TCustomer c=new TCustomer(1,"Tom");
-		ProducerRecord<Integer, TCustomer> record = new ProducerRecord<Integer, TCustomer>(topic, c.getID(), c);
+		String topic="TCustomer";
+		ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, "id001", "Tom");
 		try {
+			//如果去掉get，也不会阻塞，但无法获知发送结果
 			producer.send(record).get();
 			logger.info("msg sent successed!");
 		} catch (InterruptedException e) {
@@ -49,9 +51,8 @@ public class TProducerCustom implements Callback, Closeable {
 	}
 	
 	public void SendAsync() {
-		String topic="TCustomerCustom";
-		TCustomer c=new TCustomer(2,"Jerry");
-	    ProducerRecord<Integer, TCustomer> record = new ProducerRecord<Integer, TCustomer>(topic, c.getID(), c);
+		String topic="TCustomer";
+	    ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, "id002", "Jerry");
 		producer.send(record,this);
 	}
 	
@@ -62,7 +63,7 @@ public class TProducerCustom implements Callback, Closeable {
 	}
 	
     public static void main( String[] args ) throws IOException {
-    	TProducerCustom producer = new TProducerCustom("localhost:9092", "group002");
+    	TProducerString producer = new TProducerString("localhost:9092", "group001");
     	producer.SendSync();
     	producer.SendAsync();
     	

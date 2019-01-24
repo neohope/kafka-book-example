@@ -1,4 +1,4 @@
-package com.neohope.kk.kkdemo;
+package com.neohope.kk.demo.avrogeneral;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -15,6 +15,10 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 通过Avro GenericRecord序列化传递信息
+ * @author Hansen
+ */
 public class TProducerAvroGeneral implements Callback, Closeable {
 	private static Logger logger = LoggerFactory.getLogger(TProducerAvroGeneral.class);
 

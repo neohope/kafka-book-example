@@ -1,4 +1,4 @@
-package com.neohope.kk.kkdemo;
+package com.neohope.kk.demo.avroschema;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -18,25 +18,29 @@ import org.apache.kafka.common.TopicPartition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TConsumerAvroGeneral implements Closeable {
-	private static Logger logger = LoggerFactory.getLogger(TConsumerAvroGeneral.class);
+/**
+ * 通过Avro Schema序列化传递信息
+ * @author Hansen
+ */
+public class TConsumerAvroSchema implements Closeable {
+	private static Logger logger = LoggerFactory.getLogger(TConsumerAvroSchema.class);
 	
 	private Properties kafkaProps;
-	private KafkaConsumer<Object, Object> consumer;
+	private KafkaConsumer<Integer, GenericRecord> consumer;
 	
 	@Override
 	public void close() throws IOException {
 		if(consumer!=null)consumer.close();
 	}
 	
-	public TConsumerAvroGeneral(String serverPort, String groupId) {
+	public TConsumerAvroSchema(String serverPort, String groupId) {
 		kafkaProps = new Properties();
 		kafkaProps.put("bootstrap.servers",serverPort);
 		kafkaProps.put("group.id", groupId);
 		kafkaProps.put("key.deserializer","io.confluent.kafka.serializers.KafkaAvroDeserializer");
 		kafkaProps.put("value.deserializer","io.confluent.kafka.serializers.KafkaAvroDeserializer");
 		kafkaProps.put("schema.registry.url", "http://localhost:8081");
-		consumer = new KafkaConsumer<Object, Object>(kafkaProps);
+		consumer = new KafkaConsumer<Integer, GenericRecord>(kafkaProps);
 	}
 	
 	public void PollSync(List<String> topics) {
@@ -44,10 +48,12 @@ public class TConsumerAvroGeneral implements Closeable {
 			consumer.subscribe(topics);
 			
 			while(true){
-				ConsumerRecords<Object, Object> records = consumer.poll(Duration.ofMillis(100));
-				for(ConsumerRecord<Object, Object> record:records){
+				ConsumerRecords<Integer, GenericRecord> records = consumer.poll(Duration.ofMillis(100));
+				for(ConsumerRecord<Integer, GenericRecord> record:records){
+					// why it is GenericRecord? 
+					// should be TCustomerSchema
 					logger.info(String.format("topic=%s, partition=%s, offset=%d, customerId=%s, customerName=%s",
-							record.topic(), record.partition(), record.offset(), record.key(), ((GenericRecord)record.value()).get("name")));
+							record.topic(), record.partition(), record.offset(), record.key(), record.value().get("name")));
 				}
 				
 				consumer.commitAsync(new OffsetCommitCallback(){
@@ -64,10 +70,10 @@ public class TConsumerAvroGeneral implements Closeable {
 	}
 	
     public static void main( String[] args ) throws IOException {
-    	TConsumerAvroGeneral consumer=new TConsumerAvroGeneral("localhost:9092","group004");
+    	TConsumerAvroSchema consumer=new TConsumerAvroSchema("localhost:9092","group003");
     	
 		List<String> topics=new ArrayList<>();
-		topics.add("TCustomerAvroGeneral");
+		topics.add("TCustomerAvroSchema");
     	consumer.PollSync(topics);
     	
     	consumer.close();

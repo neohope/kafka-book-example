@@ -1,4 +1,4 @@
-package com.neohope.kk.kkdemo.beans;
+package com.neohope.kk.demo.beans;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
@@ -10,6 +10,10 @@ import org.apache.kafka.common.serialization.Serializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 自定义序列化/反序列化工具类
+ * @author Hansen
+ */
 public class TCustomerSerializer implements Serializer<TCustomer>, Deserializer<TCustomer>{
 	
 	private static Logger logger = LoggerFactory.getLogger(TCustomerSerializer.class);

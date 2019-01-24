@@ -1,4 +1,4 @@
-package com.neohope.kk.kkdemo;
+package com.neohope.kk.demo.custom;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -15,8 +15,12 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.neohope.kk.kkdemo.beans.TCustomer;
+import com.neohope.kk.demo.beans.TCustomer;
 
+/**
+ * 通过自定义序列化类传递信息
+ * @author Hansen
+ */
 public class TConsumerCustom implements Callback, Closeable {
 	private static Logger logger = LoggerFactory.getLogger(TConsumerCustom.class);
 	
@@ -33,7 +37,7 @@ public class TConsumerCustom implements Callback, Closeable {
 		kafkaProps.put("bootstrap.servers",serverPort);
 		kafkaProps.put("group.id", groupId);
 		kafkaProps.put("key.deserializer","org.apache.kafka.common.serialization.IntegerDeserializer");
-		kafkaProps.put("value.deserializer","com.neohope.kk.kkdemo.beans.TCustomerSerializer");
+		kafkaProps.put("value.deserializer","com.neohope.kk.demo.beans.TCustomerSerializer");
 		consumer = new KafkaConsumer<Integer, TCustomer>(kafkaProps);
 	}
 	

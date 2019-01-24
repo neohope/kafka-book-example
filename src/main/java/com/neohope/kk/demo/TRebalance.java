@@ -1,4 +1,4 @@
-package com.neohope.kk.kkdemo;
+package com.neohope.kk.demo;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -20,6 +20,10 @@ import org.apache.kafka.common.TopicPartition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 带ConsumerRebalanceListener的Consumer
+ * @author Hansen
+ */
 public class TRebalance implements Closeable, ConsumerRebalanceListener {
 	
 	private static Logger logger = LoggerFactory.getLogger(TRebalance.class);
@@ -45,7 +49,6 @@ public class TRebalance implements Closeable, ConsumerRebalanceListener {
 	//停止读取消息之后，reblance之前
 	@Override
 	public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
-		
 	}
 
 	//reblance之后，开始读取消息之前
@@ -60,7 +63,7 @@ public class TRebalance implements Closeable, ConsumerRebalanceListener {
 		return 0l;
 	}
 	
-	private void saveOffsetToDB(String topic,int partition, long offset){
+	private void saveOffsetToDB(String topic, int partition, long offset){
 	}
 	
 	public void PollSync(List<String> topics) {

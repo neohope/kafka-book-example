@@ -1,5 +1,9 @@
-package com.neohope.kk.kkdemo.beans;
+package com.neohope.kk.demo.beans;
 
+/**
+ * TCustomer类
+ * @author Hansen
+ */
 public class TCustomer {
 	private int customerID;
 	private String customerName;

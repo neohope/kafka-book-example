@@ -3,11 +3,11 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.neohope.kk.kkdemo.beans;  
+package com.neohope.kk.demo.beans;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TCustomerSchema\",\"namespace\":\"com.neohope.kk.kkdemo.beans\",\"fields\":[{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"faxNumber\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TCustomerSchema\",\"namespace\":\"com.neohope.kk.demo.beans\",\"fields\":[{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"faxNumber\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public int id;
   @Deprecated public java.lang.CharSequence name;
@@ -96,18 +96,18 @@ public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase
   }
 
   /** Creates a new TCustomerSchema RecordBuilder */
-  public static com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder newBuilder() {
-    return new com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder();
+  public static com.neohope.kk.demo.beans.TCustomerSchema.Builder newBuilder() {
+    return new com.neohope.kk.demo.beans.TCustomerSchema.Builder();
   }
   
   /** Creates a new TCustomerSchema RecordBuilder by copying an existing Builder */
-  public static com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder newBuilder(com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder other) {
-    return new com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder(other);
+  public static com.neohope.kk.demo.beans.TCustomerSchema.Builder newBuilder(com.neohope.kk.demo.beans.TCustomerSchema.Builder other) {
+    return new com.neohope.kk.demo.beans.TCustomerSchema.Builder(other);
   }
   
   /** Creates a new TCustomerSchema RecordBuilder by copying an existing TCustomerSchema instance */
-  public static com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder newBuilder(com.neohope.kk.kkdemo.beans.TCustomerSchema other) {
-    return new com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder(other);
+  public static com.neohope.kk.demo.beans.TCustomerSchema.Builder newBuilder(com.neohope.kk.demo.beans.TCustomerSchema other) {
+    return new com.neohope.kk.demo.beans.TCustomerSchema.Builder(other);
   }
   
   /**
@@ -122,11 +122,11 @@ public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.neohope.kk.kkdemo.beans.TCustomerSchema.SCHEMA$);
+      super(com.neohope.kk.demo.beans.TCustomerSchema.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder other) {
+    private Builder(com.neohope.kk.demo.beans.TCustomerSchema.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -143,8 +143,8 @@ public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Creates a Builder by copying an existing TCustomerSchema instance */
-    private Builder(com.neohope.kk.kkdemo.beans.TCustomerSchema other) {
-            super(com.neohope.kk.kkdemo.beans.TCustomerSchema.SCHEMA$);
+    private Builder(com.neohope.kk.demo.beans.TCustomerSchema other) {
+            super(com.neohope.kk.demo.beans.TCustomerSchema.SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
@@ -165,7 +165,7 @@ public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Sets the value of the 'id' field */
-    public com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder setId(int value) {
+    public com.neohope.kk.demo.beans.TCustomerSchema.Builder setId(int value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -178,7 +178,7 @@ public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Clears the value of the 'id' field */
-    public com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder clearId() {
+    public com.neohope.kk.demo.beans.TCustomerSchema.Builder clearId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -189,7 +189,7 @@ public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Sets the value of the 'name' field */
-    public com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder setName(java.lang.CharSequence value) {
+    public com.neohope.kk.demo.beans.TCustomerSchema.Builder setName(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.name = value;
       fieldSetFlags()[1] = true;
@@ -202,7 +202,7 @@ public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Clears the value of the 'name' field */
-    public com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder clearName() {
+    public com.neohope.kk.demo.beans.TCustomerSchema.Builder clearName() {
       name = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -214,7 +214,7 @@ public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Sets the value of the 'faxNumber' field */
-    public com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder setFaxNumber(java.lang.CharSequence value) {
+    public com.neohope.kk.demo.beans.TCustomerSchema.Builder setFaxNumber(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.faxNumber = value;
       fieldSetFlags()[2] = true;
@@ -227,7 +227,7 @@ public class TCustomerSchema extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Clears the value of the 'faxNumber' field */
-    public com.neohope.kk.kkdemo.beans.TCustomerSchema.Builder clearFaxNumber() {
+    public com.neohope.kk.demo.beans.TCustomerSchema.Builder clearFaxNumber() {
       faxNumber = null;
       fieldSetFlags()[2] = false;
       return this;

@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.neohope.kk</groupId>
-	<artifactId>kkdemo</artifactId>
+	<artifactId>demo</artifactId>
 	<version>0.1.0</version>
 	<packaging>jar</packaging>
 
-	<name>kkdemo</name>
+	<name>demo</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -15,6 +15,12 @@
 	</properties>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.12</artifactId>
+			<version>2.1.0</version>
+		</dependency>
 	
 		<dependency>
 			<groupId>org.apache.kafka</groupId>

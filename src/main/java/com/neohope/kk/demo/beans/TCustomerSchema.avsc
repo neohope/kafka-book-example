@@ -1,4 +1,4 @@
-{"namespace":"com.neohope.kk.kkdemo.beans",
+{"namespace":"com.neohope.kk.demo.beans",
 "type":"record",
 "name":"TCustomerSchema",
 "fields":[

@@ -1,4 +1,4 @@
-package com.neohope.kk.kkdemo;
+package com.neohope.kk.demo;
 
 import java.util.Map;
 
@@ -9,6 +9,10 @@ import org.apache.kafka.common.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 分区管理器
+ * @author Hansen
+ */
 public class TPartition implements Partitioner {
 	private static Logger logger = LoggerFactory.getLogger(TPartition.class);
 
